@@ -1,2 +1,2 @@
-# Calis Fit
+# CalisCount
 ## BMI checker, Fitness Tracker and More!
