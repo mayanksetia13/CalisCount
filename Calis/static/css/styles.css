@@ -1,0 +1,38 @@
+#title_header {
+    font-size: 3em;
+    font-family: 'Anton';
+}
+
+.navbar-brand {
+    font-family: 'Anton';
+    font-size: 1.7em;
+}
+
+#register_heading {
+    font-size: 3em;
+    font-family: 'Anton';
+}
+
+.about_ {
+    font-family: 'Anton';
+}
+
+.bg-custom {
+    background-image: url('https://static.fitbodybuzz.com/wp-content/uploads/2014/10/benefits-of-calisthenics-1.jpg');
+    height:50vh;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bg-custom div{
+	background-color: white;
+	border-radius:2em;
+	padding: 2em;
+	height: 12em;
+}
+
+#para-1{
+
+}
