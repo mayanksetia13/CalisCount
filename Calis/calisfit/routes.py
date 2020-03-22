@@ -2,7 +2,7 @@ from flask import render_template , url_for, flash, redirect
 from calisfit import app , db, bcrypt
 from calisfit.forms import RegistrationForm , LoginForm
 from calisfit.models import User
-from flask_login import login_user, current_user
+from flask_login import login_user, current_user, logout_user
 
 
 @app.route('/')
@@ -49,3 +49,9 @@ def body():
 @app.route('/learn')
 def learn():
 	return render_template('learn.html')
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    flash('You have been logged out!')
+    return redirect('/')

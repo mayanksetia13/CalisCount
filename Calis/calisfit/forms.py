@@ -11,11 +11,14 @@ class RegistrationForm(FlaskForm):
 	submit= SubmitField('Register')
 
 	def validate_username(self, username):
+		if not User.create_db(debug=False):
+			raise ValidationError('Something went wrong, Please reload the Page')
 		user = User.query.filter_by(username=username.data).first()
 		if user:
 			raise ValidationError('Username Already Taken!')
 
 	def validate_email(self, email):
+		User.create_db(debug=False)
 		user = User.query.filter_by(email=email.data).first()
 		if user:
 			raise ValidationError('Email is Already Taken!')		
