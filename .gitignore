@@ -7,3 +7,6 @@ pyvenv.cfg
 .DS_Store
 .DS_Store
 *.pyc
+bin/
+include/
+lib/
