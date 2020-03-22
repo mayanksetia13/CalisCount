@@ -37,8 +37,12 @@
                         Let's Exercise
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        {% if current_user.is_authenticated %}
+                        <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
+                        {% else %}
                         <a class="dropdown-item" href="{{ url_for('login') }}">Login</a>
                         <a class="dropdown-item" href="{{ url_for('register') }}">Register</a>
+                        {% endif %}
                     </div>
                 </li>
             </ul>
