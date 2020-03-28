@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect
 from calisfit import app, db, bcrypt
 from calisfit.forms import RegistrationForm, LoginForm
 from calisfit.models import User
-from flask_login import login_user, current_user, logout_user
+from flask_login import login_user, current_user, logout_user, login_required
 
 
 @app.route('/')
@@ -64,3 +64,14 @@ def logout():
     logout_user()
     flash('You have been logged out!', 'info')
     return redirect('/')
+
+@app.route('/profile')
+@login_required
+def profile():
+	return render_template('profile.html',title='Profile')
+
+@app.route('/track')
+@login_required
+def trackrecord():
+	return render_template('track.html',title='TrackRecord')	
+
