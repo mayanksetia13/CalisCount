@@ -11,3 +11,5 @@ bin/
 include/
 lib/
 Calis/calisfit/site.db
+static/profile_pics/*
+static/graphs/*
