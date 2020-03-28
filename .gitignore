@@ -10,3 +10,4 @@ pyvenv.cfg
 bin/
 include/
 lib/
+Calis/calisfit/site.db
