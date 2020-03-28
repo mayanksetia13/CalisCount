@@ -13,6 +13,14 @@ class RegistrationForm(FlaskForm):
    
     username = StringField('Username',[InputRequired(), Length(min=2, max=20)])
     email = StringField('Email', validators=[InputRequired(), Email()])
+    gender = SelectField(
+        'Gender',
+        choices=[
+                        ('M', 'Male'),
+                        ('F', 'Female')
+        ],
+        validators=[InputRequired()]
+    )
     password = PasswordField('Password', validators=[InputRequired()])
     confirm_password = PasswordField('Confirm Password', validators=[
                                      InputRequired(), EqualTo('password')])
@@ -79,20 +87,12 @@ class MyBodyForm(FlaskForm):
 			InputRequired(),
             NumberRange(min=1, max=300)],
         render_kw={'placeholder': 'In KGs'})
-    gender = SelectField(
-        'Gender',
-        choices=[
-                        ('M', 'Male'),
-                        ('F', 'Female')
-        ],
-        validators=[InputRequired()]
-    )
-    activity_level = SelectField(
+    activity = SelectField(
         "Activity Level",
         choices=[
             ("sedentary", "I am sedentary (little or no exercise)"),
-            ("lightly", "I am lightly active (light exercise or sports 1-3 days per week)"),
-            ("moderately", "I am moderately active (moderate exercise or sports 3-5 days per week)"),
+            ("light", "I am lightly active (light exercise or sports 1-3 days per week)"),
+            ("moderate", "I am moderately active (moderate exercise or sports 3-5 days per week)"),
             ("active", "I am very active (hard exercise or sports 6-7 days per week)"),
             ("super", "I am super active (very hard exercise or sports and a physical job)")
         ], validators=[InputRequired()]
