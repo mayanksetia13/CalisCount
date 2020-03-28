@@ -1,5 +1,5 @@
-from flask import (render_template, url_for, flash, redirect,
-                   request)
+from flask import (render_template, url_for, flash, 
+                   redirect, request)
 from calisfit import app, db, bcrypt
 from calisfit.forms import (RegistrationForm, LoginForm,
                             MyBodyForm)
@@ -41,7 +41,8 @@ def login():
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user, remember=form.remember.data)
-                return redirect(url_for('about'))
+                next_page = request.args.get('next')
+                return redirect(next_page) if next_page else redirect(url_for('about'))
             flash('Login Unsuccessful. Please check your password!','danger')
         else:
             flash("Login Unsuccessful. Please Check Username", 'danger')
@@ -77,7 +78,8 @@ def logout():
 @app.route('/profile')
 @login_required
 def profile():
-	return render_template('profile.html',title='Profile')
+	image_file = url_for('static',filename='profile_pics/'+ current_user.image_file)
+	return render_template('profile.html',title='Profile', image_file=image_file)
 
 @app.route('/track')
 @login_required
