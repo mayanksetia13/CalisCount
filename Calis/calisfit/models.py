@@ -1,9 +1,13 @@
 import secrets
 import os
+import os.path
 from PIL import Image
 from calisfit import db, login_manager
 from flask_login import UserMixin
 from matplotlib import pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -33,16 +37,21 @@ class User(db.Model, UserMixin):
         except:
             db.create_all()
             return False
-        
+
     @staticmethod
     def save_picture(app, form_picture):
         random_hex = secrets.token_hex(8)
-        _,f_ext = os.path.splitext(form_picture.filename)
+        _, f_ext = os.path.splitext(form_picture.filename)
         picture_fn = random_hex + f_ext
-        picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
+        picture_path = os.path.join(
+            app.root_path, 'static/profile_pics', picture_fn)
+        dir_path = os.path.join(app.root_path, 'static/profile_pics')
 
-        output_size = (125,125)
-        i= Image.open(form_picture)
+        if not os.path.exists(dir_path):
+            os.mkdir(dir_path)
+
+        output_size = (125, 125)
+        i = Image.open(form_picture)
         i.thumbnail(output_size)
 
         i.save(picture_path)
@@ -90,8 +99,37 @@ class Cred(db.Model):
             (6.25 * self.height) - (5 * self.age) - 161
         self.bmr = round(self.bmr, 2)
 
-    def display_histogram(self):
-        pass
+    def display_histogram(self, id, tracks, app):
+
+        # get all records from db
+        tracks = tracks.all()
+
+        dir_path = os.path.join(app.root_path, 'static/graphs')
+        plt.style.use('seaborn-deep')
+
+        if not os.path.exists(dir_path):
+            os.mkdir(dir_path)
+
+        graph_name = f"{self.cred_id}-{self.user_id}-{self.time.isoformat()}.png"
+        graph_path = os.path.join(dir_path, graph_name)
+
+        # if os.path.exists(graph_path):
+        #     return graph_name
+
+        bins = 20
+
+        x = [i.bmr for i in tracks]
+        y = [i.calories for i in tracks]
+
+        plt.hist([x, y], bins, label=['BMR', 'Calories'], )
+
+        plt.legend(loc='upper right')
+
+        plt.savefig(graph_path)
+
+        plt.close()
+
+        return graph_name
 
     def __repr__(self):
         return f"{self.cred_id}, {self.user_id}, {self.height}, {self.weight}, {self.age}, {self.time}, {self.bmr}, {self.calories}"

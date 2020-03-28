@@ -1,4 +1,4 @@
-from flask import (render_template, url_for, flash, 
+from flask import (render_template, url_for, flash,
                    redirect, request)
 from calisfit import app, db, bcrypt
 from calisfit.forms import (RegistrationForm, LoginForm,
@@ -6,6 +6,7 @@ from calisfit.forms import (RegistrationForm, LoginForm,
 from calisfit.models import User, Cred
 from flask_login import (login_user, current_user,
                          logout_user, login_required)
+
 
 @app.route('/')
 def index():
@@ -86,31 +87,45 @@ def logout():
     flash('You have been logged out!', 'info')
     return redirect('/')
 
+
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-	form = UpdateAccountForm()
-	if form.validate_on_submit():
-		if form.picture.data:
-			picture_file = User.save_picture(app, form.picture.data)
-			current_user.image_file = picture_file
-		current_user.username = form.username.data
-		current_user.email = form.email.data
-		db.session.commit()
-		flash('Your Profile has been updated','success')
-		return redirect(url_for('profile'))
-	elif request.method == 'GET':
-		form.username.data = current_user.username
-		form.email.data = current_user.email	
-	image_file = url_for('static',filename='profile_pics/'+ current_user.image_file)
-	return render_template('profile.html',title='Profile', image_file=image_file,form=form)
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = User.save_picture(app, form.picture.data)
+            current_user.image_file = picture_file
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('Your Profile has been updated', 'success')
+        return redirect(url_for('profile'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    image_file = url_for(
+        'static', filename='profile_pics/' + current_user.image_file)
+    return render_template('profile.html', title='Profile', image_file=image_file, form=form)
+
 
 @app.route('/track')
 @login_required
 def trackrecord():
+    
     tracks = Cred.query.order_by(
         db.desc('time')
     ).filter_by(
         user_id=current_user.id
-    ).all()
-    return render_template('track.html', title='TrackRecord')
+    )
+
+    first = tracks.first()
+
+    path = first.display_histogram(
+        id=current_user.id,
+        tracks=tracks,
+        app=app
+    )
+    return render_template('track.html',
+                           title='TrackRecord',
+                           path=path)
