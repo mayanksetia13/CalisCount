@@ -1,14 +1,14 @@
 {% extends "common.html" %}
 {% block content %}
 	<div class="content-section">
-		<div class="media">
-			<img class="rounded-circle account-img" src="{{ image_file }}">
-			<div class="media-body">
+		<div class="media container py-5">
+			<img class="rounded-circle account-img border border-dark" src="{{ image_file }}">
+			<div class="media-body mt-3">
 				<h2 class="account-heading">{{ current_user.username | title }}</h2>
-				<p class="text-secondary">{{ current_user.email }}</p>
+				<p class="text-secondary ml-4">{{ current_user.email }}</p>
 			</div>
 		</div>
-		<form method="POST" action="" enctype="multipart/form-data">
+		<form class="container" method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Account Info</legend>

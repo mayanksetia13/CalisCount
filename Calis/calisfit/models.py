@@ -1,6 +1,9 @@
+import secrets
+import os
+from PIL import Image
 from calisfit import db, login_manager
 from flask_login import UserMixin
-
+from matplotlib import pyplot as plt
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -30,6 +33,21 @@ class User(db.Model, UserMixin):
         except:
             db.create_all()
             return False
+        
+    @staticmethod
+    def save_picture(app, form_picture):
+        random_hex = secrets.token_hex(8)
+        _,f_ext = os.path.splitext(form_picture.filename)
+        picture_fn = random_hex + f_ext
+        picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
+
+        output_size = (125,125)
+        i= Image.open(form_picture)
+        i.thumbnail(output_size)
+
+        i.save(picture_path)
+
+        return picture_fn
 
 
 class Cred(db.Model):
@@ -71,6 +89,9 @@ class Cred(db.Model):
         self.bmr = (10 * self.weight) + \
             (6.25 * self.height) - (5 * self.age) - 161
         self.bmr = round(self.bmr, 2)
+
+    def display_histogram(self):
+        pass
 
     def __repr__(self):
         return f"{self.cred_id}, {self.user_id}, {self.height}, {self.weight}, {self.age}, {self.time}, {self.bmr}, {self.calories}"
