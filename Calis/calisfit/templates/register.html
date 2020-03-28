@@ -13,9 +13,9 @@
 
                         {% if form.username.errors %}
                         {{ form.username(class="form-control form-control-lg is-valid") }}
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback d-block">
                             {% for error in form.username.errors %}
-                            <span>{{ error }}</span>
+                            <li>{{ error }}</li>
                             {% endfor %}
                         </div>
                         {% else %}
@@ -27,9 +27,9 @@
 
                         {% if form.email.errors %}
                         {{ form.email(class="form-control form-control-lg is-valid") }}
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback d-block">
                             {% for error in form.email.errors %}
-                            <span>{{ error }}</span>
+                            <li>{{ error }}</li>
                             {% endfor %}
                         </div>
                         {% else %}
@@ -41,9 +41,9 @@
 
                         {% if form.password.errors %}
                         {{ form.password(class="form-control form-control-lg is-valid") }}
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback d-block">
                             {% for error in form.password.errors %}
-                            <span>{{ error }}</span>
+                            <li>{{ error }}</li>
                             {% endfor %}
                         </div>
                         {% else %}
@@ -55,9 +55,9 @@
 
                         {% if form.confirm_password.errors %}
                         {{ form.confirm_password(class="form-control form-control-lg is-valid") }}
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback d-block">
                             {% for error in form.confirm_password.errors %}
-                            <span>{{ error }}</span>
+                            <li>{{ error }}</li>
                             {% endfor %}
                         </div>
                         {% else %}

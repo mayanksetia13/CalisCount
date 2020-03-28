@@ -1,8 +1,11 @@
-from flask import render_template, url_for, flash, redirect, request
+from flask import (render_template, url_for, flash, 
+                   redirect, request)
 from calisfit import app, db, bcrypt
-from calisfit.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from calisfit.forms import (RegistrationForm, LoginForm,
+                            MyBodyForm, UpdateAccountForm)
 from calisfit.models import User
-from flask_login import login_user, current_user, logout_user, login_required
+from flask_login import (login_user, current_user, 
+                         logout_user, login_required)
 
 
 @app.route('/')
@@ -51,9 +54,13 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/body')
+@app.route('/body', methods=['GET', 'POST'])
 def body():
-    return render_template('body.html')
+    form = MyBodyForm()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            return redirect('track')
+    return render_template('body.html', form=form)
 
 
 @app.route('/learn')
@@ -62,6 +69,7 @@ def learn():
 
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     flash('You have been logged out!', 'info')
