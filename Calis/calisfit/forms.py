@@ -97,5 +97,13 @@ class MyBodyForm(FlaskForm):
             ("super", "I am super active (very hard exercise or sports and a physical job)")
         ], validators=[InputRequired()]
     )
+    selectp = SelectField(
+        "Protein Calculation",
+        choices=[
+            ("Maintain","I want to maintain my weight"),
+            ("Leaning","I want to build lean body"),
+            ("Gain","I want to gain muscle")
+        ], validators=[InputRequired()]
+    )
     submit = SubmitField('Submit')
 

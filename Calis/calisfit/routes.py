@@ -67,6 +67,7 @@ def body():
                 weight=form.weight.data,
                 age=form.age.data,
                 activity=form.activity.data,
+                selectp=form.selectp.data
             )
             track.cal(gender=current_user.gender)
             db.session.add(track)

@@ -70,10 +70,13 @@ class Cred(db.Model):
     activity = db.Column(db.String(20), nullable=False)
     bmr = db.Column(db.Float, nullable=False)
     calories = db.Column(db.Float, nullable=False)
+    selectp = db.Column(db.String(20),nullable=False)
+    protein = db.Column(db.Float,nullable=False)
 
     def cal(self, gender):
         self.cal_bmr(gender)
         self.cal_cal()
+        self.cal_protein()
 
     def cal_cal(self):
         self.calories = self.bmr * {
@@ -96,8 +99,15 @@ class Cred(db.Model):
             (6.25 * self.height) - (5 * self.age) - 161
         self.bmr = round(self.bmr, 2)
 
-    def display_histogram(self, tracks):
+    def cal_protein(self):
+        self.protein = (self.weight * 2.20) * {
+            "Maintain":1,
+            "Leaning":1,
+            "Gain":1.5
+        }.get(self.selectp)
+        self.protein = round(self.protein, 2)    
 
+    def display_histogram(self, tracks):
         tracks = tracks.all()
 
         x = [i.bmr for i in tracks]
@@ -107,4 +117,4 @@ class Cred(db.Model):
         return x, y, dates
 
     def __repr__(self):
-        return f"{self.cred_id}, {self.user_id}, {self.height}, {self.weight}, {self.age}, {self.time}, {self.bmr}, {self.calories}"
+        return f"{self.cred_id}, {self.user_id}, {self.height}, {self.weight}, {self.age}, {self.time}, {self.bmr}, {self.calories}, {self.protein}"
