@@ -9,4 +9,4 @@ include/
 lib/
 Calis/calisfit/site.db
 Calis/calisfit/static/profile_pics/*
-static/graphs/*
+Calis/calisfit/static/graphs/*

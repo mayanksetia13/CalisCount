@@ -128,14 +128,17 @@ def trackrecord():
     ).filter_by(
         user_id=current_user.id
     )
+    
+    path = None
 
     first = tracks.first()
 
-    path = first.display_histogram(
-        id=current_user.id,
-        tracks=tracks,
-        app=app
-    )
+    if first:
+        path = first.display_histogram(
+            id=current_user.id,
+            tracks=tracks,
+            app=app
+        )
     return render_template('track.html',
                            title='TrackRecord',
                            path=path)

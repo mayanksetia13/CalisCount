@@ -4,7 +4,14 @@
 <div class="container">
     <div class="row">
         <div class="col-12 col-lg-7 mx-auto">
+            {% if path %}
             <img class="img-fluid" src="/static/graphs/{{path}}" alt="Graph">
+            {% else %}
+            <div class="text-center mt-5">
+                <h1>Records Empty!</h1>
+                <a class="text-info" href="/body">Click here to Add Record</a>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
