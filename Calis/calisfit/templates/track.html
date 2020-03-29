@@ -3,16 +3,98 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-12 col-lg-7 mx-auto">
-            {% if path %}
-            <img class="img-fluid" src="/static/graphs/{{path}}" alt="Graph">
+        <div class="col-12 col-lg-8 mx-auto">
+            {% if data %}
+            <figure class="highcharts-figure">
+                <div id="container"></div>
+                <p class="highcharts-description text-center">
+                    Line chart showing <span class="text-info font-weight-bold">BMR</span>, <span class="text-info font-weight-bold">Calory</span> and <span class="text-info font-weight-bold">Protein</span> intake.
+                </p>
+            </figure>            
             {% else %}
             <div class="text-center mt-5">
                 <h1>Records Empty!</h1>
-                <a class="text-info" href="/body">Click here to Add Record</a>
+                <a class="text-info font-weight-bold" href="/body">Click here to Add Record</a>
             </div>
             {% endif %}
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    Highcharts.chart('container', {
+
+        title: {
+            text: 'BMR, Calories and Proteins Requirements'
+        },
+    
+        subtitle: {
+            text: 'Calculated for Every Record'
+        },
+    
+        yAxis: {
+            title: {
+                text: 'BMR, Calories and Proteins Intake'
+            }
+        },
+    
+        xAxis: {
+            accessibility: {
+                rangeDescription: 'Calculated at Each Entry'
+            }
+        },
+    
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+    
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                },
+                pointStart: 1
+            }
+        },
+    
+        series: [{
+            name: 'BMR',
+            data: [
+            {% for i in data[0] %}
+            {{i}},
+            {% endfor %}
+            ]
+        }, {
+            name: 'Calories',
+            data: [
+            {% for i in data[1]%}
+            {{i}},
+            {% endfor %}
+            ]
+        }, {
+            name: 'Proteins',
+            data: []
+        }],
+    
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+    
+    });
+</script>
 {% endblock %}

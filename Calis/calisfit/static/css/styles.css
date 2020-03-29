@@ -1,59 +1,59 @@
-#title_header , .navbar-brand{
-    font-family: 'Anton';
-    color:rgba(0,0,0,0.95);
-    backdrop-filter: blur(2px);
-    transition: all 400ms ease-in-out;
+#title_header,
+.navbar-brand {
+  font-family: "Anton";
+  color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(2px);
+  transition: all 400ms ease-in-out;
 }
 
-#title_header:hover{
-    text-shadow: 0px 0px 25px rgba(255,255,255,0.7),
-    4px 10px 10px black;
-    text-decoration: none;
+#title_header:hover {
+  text-shadow: 0px 0px 25px rgba(255, 255, 255, 0.7), 4px 10px 10px black;
+  text-decoration: none;
 }
 
 .navbar-brand {
-    font-size: 1.7em;
+  font-size: 1.7em;
 }
 
-.nav-link{
-    color:black!important;
-    font-weight: bold;
+.nav-link {
+  color: black !important;
+  font-weight: bold;
 }
 
-.navbar-brand:hover{
-    text-shadow: 1px 4px 5px rgba(0,0,0,0.4);
+.navbar-brand:hover {
+  text-shadow: 1px 4px 5px rgba(0, 0, 0, 0.4);
 }
 #register_heading {
-    font-size: 3em;
-    font-family: 'Anton';
+  font-size: 3em;
+  font-family: "Anton";
 }
 
 .about_ {
-    font-family: 'Anton';
+  font-family: "Anton";
 }
 
 .bg-custom {
-    background-image: url('https://static.fitbodybuzz.com/wp-content/uploads/2014/10/benefits-of-calisthenics-1.jpg');
-    height:50vh;
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  background-image: url("https://static.fitbodybuzz.com/wp-content/uploads/2014/10/benefits-of-calisthenics-1.jpg");
+  height: 50vh;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.bg-custom div{
-	background-color: white;
-	border-radius:2em;
-	padding: 2em;
-	height: 12em;
+.bg-custom div {
+  background-color: white;
+  border-radius: 2em;
+  padding: 2em;
+  height: 12em;
 }
 
-.bg-landing{
-    min-height: 94vh;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+.bg-landing {
+  min-height: 94vh;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .account-img {
@@ -67,4 +67,40 @@
   font-size: 2.5rem;
 }
 
-/* #para-1{} */
+.highcharts-figure,
+.highcharts-data-table table {
+  min-width: 360px;
+  max-width: 800px;
+  margin: 1em auto;
+}
+
+.highcharts-data-table table {
+  font-family: Verdana, sans-serif;
+  border-collapse: collapse;
+  border: 1px solid #ebebeb;
+  margin: 10px auto;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+}
+.highcharts-data-table caption {
+  padding: 1em 0;
+  font-size: 1.2em;
+  color: #555;
+}
+.highcharts-data-table th {
+  font-weight: 600;
+  padding: 0.5em;
+}
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+  padding: 0.5em;
+}
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+  background: #f8f8f8;
+}
+.highcharts-data-table tr:hover {
+  background: #f1f7ff;
+}

@@ -4,9 +4,6 @@ import os.path
 from PIL import Image
 from calisfit import db, login_manager
 from flask_login import UserMixin
-from matplotlib import pyplot as plt
-import matplotlib
-matplotlib.use('Agg')
 
 
 @login_manager.user_loader
@@ -99,37 +96,15 @@ class Cred(db.Model):
             (6.25 * self.height) - (5 * self.age) - 161
         self.bmr = round(self.bmr, 2)
 
-    def display_histogram(self, id, tracks, app):
+    def display_histogram(self, tracks):
 
-        # get all records from db
         tracks = tracks.all()
-
-        dir_path = os.path.join(app.root_path, 'static/graphs')
-        plt.style.use('seaborn-deep')
-
-        if not os.path.exists(dir_path):
-            os.mkdir(dir_path)
-
-        graph_name = f"{self.cred_id}-{self.user_id}-{self.time.isoformat()}.png"
-        graph_path = os.path.join(dir_path, graph_name)
-
-        # if os.path.exists(graph_path):
-        #     return graph_name
-
-        bins = 20
 
         x = [i.bmr for i in tracks]
         y = [i.calories for i in tracks]
+        dates = [i.time for i in tracks]
 
-        plt.hist([x, y], bins, label=['BMR', 'Calories'], )
-
-        plt.legend(loc='upper right')
-
-        plt.savefig(graph_path)
-
-        plt.close()
-
-        return graph_name
+        return x, y, dates
 
     def __repr__(self):
         return f"{self.cred_id}, {self.user_id}, {self.height}, {self.weight}, {self.age}, {self.time}, {self.bmr}, {self.calories}"

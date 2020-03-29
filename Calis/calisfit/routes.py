@@ -124,21 +124,19 @@ def profile():
 def trackrecord():
 
     tracks = Cred.query.order_by(
-        db.desc('time')
+        db.asc('time')
     ).filter_by(
         user_id=current_user.id
     )
     
-    path = None
+    data = None
 
     first = tracks.first()
 
     if first:
-        path = first.display_histogram(
-            id=current_user.id,
+        data = first.display_histogram(
             tracks=tracks,
-            app=app
         )
     return render_template('track.html',
                            title='TrackRecord',
-                           path=path)
+                           data=data)
