@@ -112,9 +112,9 @@ class Cred(db.Model):
 
         x = [i.bmr for i in tracks]
         y = [i.calories for i in tracks]
-        dates = [i.time for i in tracks]
+        z = [i.protein for i in tracks]
 
-        return x, y, dates
+        return x, y, z
 
     def __repr__(self):
         return f"{self.cred_id}, {self.user_id}, {self.height}, {self.weight}, {self.age}, {self.time}, {self.bmr}, {self.calories}, {self.protein}"

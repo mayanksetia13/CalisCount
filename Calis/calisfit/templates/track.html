@@ -77,7 +77,11 @@
             ]
         }, {
             name: 'Proteins',
-            data: []
+            data: [
+            {% for i in data[2]%}
+            {{i}},
+            {% endfor %}
+            ]
         }],
     
         responsive: {
