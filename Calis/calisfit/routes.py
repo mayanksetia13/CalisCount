@@ -57,6 +57,7 @@ def about():
 
 
 @app.route('/body', methods=['GET', 'POST'])
+@login_required
 def body():
     form = MyBodyForm()
     if request.method == 'POST':
