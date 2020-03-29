@@ -85,7 +85,7 @@ def learn():
 @login_required
 def logout():
     logout_user()
-    flash('You have been logged out!', 'info')
+    flash('You have been logged out!', 'light')
     return redirect('/')
 
 

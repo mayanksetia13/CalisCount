@@ -13,10 +13,11 @@
 
 .navbar-brand {
   font-size: 1.7em;
+  color:white!important;
 }
 
 .nav-link {
-  color: black !important;
+  color: white !important;
   font-weight: bold;
 }
 
@@ -33,19 +34,15 @@
 }
 
 .bg-custom {
-  background-image: url("https://static.fitbodybuzz.com/wp-content/uploads/2014/10/benefits-of-calisthenics-1.jpg");
-  height: 50vh;
+  background-image: url("/static/images/bg.jpg");
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.bg-custom div {
-  background-color: white;
-  border-radius: 2em;
-  padding: 2em;
-  height: 12em;
+.bg-custom .p-5{
+  background-color: rgba(0,0,0,0.5);
 }
 
 .bg-landing {
@@ -54,6 +51,10 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+.bg-nav{
+  background-color: rgba(0,0,0,0.9);
 }
 
 .account-img {
