@@ -2,7 +2,7 @@
 {% block content %}
 	<div class="content-section">
 		<div class="media container py-5">
-			<img class="rounded-circle account-img border border-dark" src="{{ image_file }}">
+			<img class="rounded-circle account-img" src="{{ image_file }}">
 			<div class="media-body mt-3">
 				<h2 class="account-heading">{{ current_user.username | title }}</h2>
 				<p class="text-secondary ml-4">{{ current_user.email }}</p>

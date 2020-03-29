@@ -20,7 +20,7 @@ class User(db.Model, UserMixin):
     gender = db.Column(db.String(1), unique=False, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(20), unique=False,
-                           nullable=False, default='default.jpg')
+                           nullable=False, default='default.png')
     password = db.Column(db.String(60), nullable=False)
     mybody = db.relationship('Cred', backref='user', lazy=True)
 

@@ -104,15 +104,25 @@ def profile():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-    image_file = url_for(
-        'static', filename='profile_pics/' + current_user.image_file)
-    return render_template('profile.html', title='Profile', image_file=image_file, form=form)
+        
+    # for displaying profile picture
+    if 'default' in current_user.image_file:
+        image_file = url_for(
+            'static', filename='images/' + current_user.image_file)
+    else:
+        image_file = url_for(
+            'static', filename='profile_pics/' + current_user.image_file)
+        
+    return render_template('profile.html',
+                           title='Profile',
+                           image_file=image_file,
+                           form=form)
 
 
 @app.route('/track')
 @login_required
 def trackrecord():
-    
+
     tracks = Cred.query.order_by(
         db.desc('time')
     ).filter_by(

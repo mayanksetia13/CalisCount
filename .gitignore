@@ -3,13 +3,10 @@ Library/
 Calis/__pycache__
 pyvenv.cfg
 .DS_Store
-.DS_Store
-.DS_Store
-.DS_Store
 *.pyc
 bin/
 include/
 lib/
 Calis/calisfit/site.db
-static/profile_pics/*
+Calis/calisfit/static/profile_pics/*
 static/graphs/*
